@@ -1,0 +1,15 @@
+{
+  "name": "petebakery",
+  "version": "1.0.0",
+  "description": "Sample app for ordering from a bakery",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "author": "peter.o",
+  "license": "ISC",
+  "dependencies": {
+    "bootbot": "^1.0.12"
+  }
+}
