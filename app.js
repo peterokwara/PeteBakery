@@ -20,4 +20,79 @@ bot.setGetStartedButton((payload, chat) => {
 	}));
 });
 
+bot.on('message', (payload, chat) => {
+	const text = payload.message.text;
+	console.log(`The user said: ${text}`);
+
+  const options = { typing: true };
+
+  chat.sendListTemplate([{
+      "title": "Classic T-Shirt Collection",
+      "image_url": "https://peterssendreceiveapp.ngrok.io/img/collection.png",
+      "subtitle": "See all our colors",
+      "buttons": [
+          {
+              "title": "View",
+              "type": "web_url",
+              "url": "https://peterssendreceiveapp.ngrok.io/collection",
+              "messenger_extensions": true,
+              "webview_height_ratio": "tall",
+              "fallback_url": "https://peterssendreceiveapp.ngrok.io/"
+          }
+      ]
+  },
+  {
+      "title": "Classic White T-Shirt",
+      "image_url": "https://peterssendreceiveapp.ngrok.io/img/white-t-shirt.png",
+      "subtitle": "100% Cotton, 200% Comfortable",
+      "buttons": [
+          {
+              "title": "Shop Now",
+              "type": "web_url",
+              "url": "https://peterssendreceiveapp.ngrok.io/shop?item=100",
+              "messenger_extensions": true,
+              "webview_height_ratio": "tall",
+              "fallback_url": "https://peterssendreceiveapp.ngrok.io/"
+          }
+      ]
+  },
+  {
+      "title": "Classic Blue T-Shirt",
+      "image_url": "https://peterssendreceiveapp.ngrok.io/img/blue-t-shirt.png",
+      "subtitle": "100% Cotton, 200% Comfortable",
+      "buttons": [
+          {
+              "title": "Shop Now",
+              "type": "web_url",
+              "url": "https://peterssendreceiveapp.ngrok.io/shop?item=101",
+              "messenger_extensions": true,
+              "webview_height_ratio": "tall",
+              "fallback_url": "https://peterssendreceiveapp.ngrok.io/"
+          }
+      ]
+  },
+  {
+      "title": "Classic Black T-Shirt",
+      "image_url": "https://peterssendreceiveapp.ngrok.io/img/black-t-shirt.png",
+      "subtitle": "100% Cotton, 200% Comfortable",
+      "buttons": [
+          {
+              "title": "Shop Now",
+              "type": "web_url",
+              "url": "https://peterssendreceiveapp.ngrok.io/shop?item=102",
+              "messenger_extensions": true,
+              "webview_height_ratio": "tall",
+              "fallback_url": "https://peterssendreceiveapp.ngrok.io/"
+          }
+      ]
+  }], [
+     {
+         "title": "View More",
+         "type": "postback",
+         "payload": "payload"
+     }
+ ], options);
+
+});
+
 bot.start();
