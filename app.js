@@ -133,7 +133,9 @@ bot.on('message', (payload, chat) => {
   }
 
   bot.on('postback:BLACKFOREST_PAYLOAD', (payload, chat) => {
-    chat.say('You selected BlackForest',{typing: true});
+    chat.say('You selected BlackForest', {
+      typing: true
+    });
     chat.conversation((convo) => {
       convo.set('name', 'blackforest');
       convo.sendTypingIndicator(1000).then(() => askQuantity(convo));
@@ -145,7 +147,7 @@ bot.on('message', (payload, chat) => {
 
     const question = {
       text: `How many do you want?`,
-      quickReplies: ['1', '2', '3','4','5']
+      quickReplies: ['1', '2', '3', '4', '5']
     };
 
     const answer = (payload, convo, data) => {
@@ -157,9 +159,9 @@ bot.on('message', (payload, chat) => {
 
     const payload = [{
       event: 'quick_reply',
-      callback: (payload, convo, data) =>{
+      callback: (payload, convo, data) => {
         const text = payload.message.text;
-        convo.set('Quantity',text);
+        convo.set('Quantity', text);
         convo.say(`Ok ${text} of them.`);
         askSize(convo);
       }
@@ -188,12 +190,89 @@ bot.on('message', (payload, chat) => {
       quickReplies: ['500g', '1Kg', '2Kg']
     };
     const answer = (payload, convo, data) => {
-      const text = payload.message.text;
-      convo.say(`Ok ${text} .`);
-      convo.set('Size',text);
+      // const text = payload.message.text;
+      // convo.say(`Ok ${text} .`);
+      // convo.set('Size',text);
     };
 
-    convo.ask(question, answer);
+    const payload = [{
+      event: 'quick_reply',
+      callback: (payload, convo, data) => {
+        const text = payload.message.text;
+        convo.say(`Ok ${text} .`);
+        convo.set('Size', text);
+
+        const payload_1 = {
+
+          "template_type": "receipt",
+          "recipient_name": "Peter Chang",
+          "order_number": "000000000000000",
+          "currency": "USD",
+          "payment_method": "Visa 1234",
+          "timestamp": "1428444852",
+          "elements": [{
+              "title": "Oculus Rift",
+              "subtitle": "Includes: headset, sensor, remote",
+              "quantity": 1,
+              "price": 599.00,
+              "currency": "USD"
+            },
+            {
+              "title": "Samsung Gear VR",
+              "subtitle": "Frost White",
+              "quantity": 1,
+              "price": 99.99,
+              "currency": "USD"
+            }
+          ],
+          "address": {
+            "street_1": "1 Hacker Way",
+            "street_2": "",
+            "city": "Menlo Park",
+            "postal_code": "94025",
+            "state": "CA",
+            "country": "US"
+          },
+          "summary": {
+            "subtotal": 698.99,
+            "shipping_cost": 20.00,
+            "total_tax": 57.67,
+            "total_cost": 626.66
+          },
+          "adjustments": [{
+              "name": "New Customer Discount",
+              "amount": -50
+            },
+            {
+              "name": "$100 Off Coupon",
+              "amount": -100
+            }
+          ]
+
+
+        };
+
+
+
+
+        const options_1 = {
+          typing: true
+        };
+        convo.sendTemplate(payload_1, options_1);
+
+        convo.say(`Ok, here's what you told me about you:
+      - Name: ${convo.get('Size')}
+      - Favorite Food: ${convo.get('Quantity')}
+      `);
+        askSize(convo);
+      }
+    }];
+
+    const options = {
+      typing: true
+    };
+
+    convo.ask(question, answer, payload, options);
     // convo.ask({
     //   text: `What size would you like?`,
     //   quickReplies: ['500g', '1Kg', '2Kg']
@@ -205,96 +284,100 @@ bot.on('message', (payload, chat) => {
     // convo.end();
   };
 
+  const sendReceipt = (convo) => {
 
-//   const question1 = {
-//     text: `What size would you like?`,
-//     quickReplies: ['500g', '1Kg', '2Kg']
-//   };
-//
-//   const answer1 = (payload, convo) => {
-//     const text = payload.message.text;
-//     convo.say(`Ok ${text} .`);
-//   };
-//
-// //   bot.hear('hello', (payload, chat) => {
-// //   chat.conversation((convo) => {
-// //     convo.sendTypingIndicator(1000).then(() => askName(convo));
-// //   });
-// // });
-//
-// const askName = (convo) => {
-//   convo.ask(`Hello! What's your name?`, (payload, convo, data) => {
-//     const text = payload.message.text;
-//     convo.set('name', text);
-//     convo.say(`Oh, your name is ${text}`).then(() => askFavoriteFood(convo));
-//   });
-// };
-//
-// const askFavoriteFood = (convo) => {
-//   convo.ask(`What's your favorite food?`, (payload, convo, data) => {
-//     const text = payload.message.text;
-//     convo.set('food', text);
-//     convo.say(`Got it, your favorite food is ${text}`).then(() => askGender(convo));
-//   });
-// };
+  }
 
-// const askGender = (convo) => {
-//   convo.ask((convo) => {
-//     const buttons = [
-//       { type: 'postback', title: 'Male', payload: 'GENDER_MALE' },
-//       { type: 'postback', title: 'Female', payload: 'GENDER_FEMALE' },
-//       { type: 'postback', title: 'I don\'t wanna say', payload: 'GENDER_UNKNOWN' }
-//     ];
-//     convo.sendButtonTemplate(`Are you a boy or a girl?`, buttons);
-//   }, (payload, convo, data) => {
-//     const text = payload.message.text;
-//     convo.set('gender', text);
-//     convo.say(`Great, you are a ${text}`).then(() => askAge(convo));
-//   }, [
-//     {
-//       event: 'postback',
-//       callback: (payload, convo) => {
-//         convo.say('You clicked on a button').then(() => askAge(convo));
-//       }
-//     },
-//     {
-//       event: 'postback:GENDER_MALE',
-//       callback: (payload, convo) => {
-//         convo.say('You said you are a Male').then(() => askAge(convo));
-//       }
-//     },
-//     {
-//       event: 'quick_reply',
-//       callback: () => {}
-//     },
-//     {
-//       event: 'quick_reply:COLOR_BLUE',
-//       callback: () => {}
-//     },
-//     {
-//       pattern: ['yes', /yea(h)?/i, 'yup'],
-//       callback: () => {
-//         convo.say('You said YES!').then(() => askAge(convo));
-//       }
-//     }
-//   ]);
-// };
 
-// const askAge = (convo) => {
-//   convo.ask(`Final question. How old are you?`, (payload, convo, data) => {
-//     const text = payload.message.text;
-//     convo.set('age', text);
-//     convo.say(`That's great!`).then(() => {
-//       convo.say(`Ok, here's what you told me about you:
-//       - Name: ${convo.get('name')}
-//       - Favorite Food: ${convo.get('food')}
-//       - Gender: ${convo.get('gender')}
-//       - Age: ${convo.get('age')}
-//       `);
-//       convo.end();
-//     });
-//   });
-// };
+  //   const question1 = {
+  //     text: `What size would you like?`,
+  //     quickReplies: ['500g', '1Kg', '2Kg']
+  //   };
+  //
+  //   const answer1 = (payload, convo) => {
+  //     const text = payload.message.text;
+  //     convo.say(`Ok ${text} .`);
+  //   };
+  //
+  // //   bot.hear('hello', (payload, chat) => {
+  // //   chat.conversation((convo) => {
+  // //     convo.sendTypingIndicator(1000).then(() => askName(convo));
+  // //   });
+  // // });
+  //
+  // const askName = (convo) => {
+  //   convo.ask(`Hello! What's your name?`, (payload, convo, data) => {
+  //     const text = payload.message.text;
+  //     convo.set('name', text);
+  //     convo.say(`Oh, your name is ${text}`).then(() => askFavoriteFood(convo));
+  //   });
+  // };
+  //
+  // const askFavoriteFood = (convo) => {
+  //   convo.ask(`What's your favorite food?`, (payload, convo, data) => {
+  //     const text = payload.message.text;
+  //     convo.set('food', text);
+  //     convo.say(`Got it, your favorite food is ${text}`).then(() => askGender(convo));
+  //   });
+  // };
+
+  // const askGender = (convo) => {
+  //   convo.ask((convo) => {
+  //     const buttons = [
+  //       { type: 'postback', title: 'Male', payload: 'GENDER_MALE' },
+  //       { type: 'postback', title: 'Female', payload: 'GENDER_FEMALE' },
+  //       { type: 'postback', title: 'I don\'t wanna say', payload: 'GENDER_UNKNOWN' }
+  //     ];
+  //     convo.sendButtonTemplate(`Are you a boy or a girl?`, buttons);
+  //   }, (payload, convo, data) => {
+  //     const text = payload.message.text;
+  //     convo.set('gender', text);
+  //     convo.say(`Great, you are a ${text}`).then(() => askAge(convo));
+  //   }, [
+  //     {
+  //       event: 'postback',
+  //       callback: (payload, convo) => {
+  //         convo.say('You clicked on a button').then(() => askAge(convo));
+  //       }
+  //     },
+  //     {
+  //       event: 'postback:GENDER_MALE',
+  //       callback: (payload, convo) => {
+  //         convo.say('You said you are a Male').then(() => askAge(convo));
+  //       }
+  //     },
+  //     {
+  //       event: 'quick_reply',
+  //       callback: () => {}
+  //     },
+  //     {
+  //       event: 'quick_reply:COLOR_BLUE',
+  //       callback: () => {}
+  //     },
+  //     {
+  //       pattern: ['yes', /yea(h)?/i, 'yup'],
+  //       callback: () => {
+  //         convo.say('You said YES!').then(() => askAge(convo));
+  //       }
+  //     }
+  //   ]);
+  // };
+
+  // const askAge = (convo) => {
+  //   convo.ask(`Final question. How old are you?`, (payload, convo, data) => {
+  //     const text = payload.message.text;
+  //     convo.set('age', text);
+  //     convo.say(`That's great!`).then(() => {
+  //       convo.say(`Ok, here's what you told me about you:
+  //       - Name: ${convo.get('name')}
+  //       - Favorite Food: ${convo.get('food')}
+  //       - Gender: ${convo.get('gender')}
+  //       - Age: ${convo.get('age')}
+  //       `);
+  //       convo.end();
+  //     });
+  //   });
+  // };
 
   //   bot.hear('Cake', (payload, chat) => {
   //
