@@ -10,6 +10,10 @@
   "author": "peter.o",
   "license": "ISC",
   "dependencies": {
-    "bootbot": "^1.0.12"
+    "body-parser": "^1.17.2",
+    "config": "^1.26.1",
+    "eventemitter3": "^2.0.3",
+    "express": "^4.15.3",
+    "node-fetch": "^1.7.1"
   }
 }
