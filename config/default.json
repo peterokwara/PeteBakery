@@ -1,5 +1,5 @@
 {
   "access_token": "EAAGqMBwcZACEBAKlHKePMZAIwtMl089ENosmxgUeF3poAG8AduUW2N5ZBrJNUqrIeifbogQYKmDE28rGHCD7jhMEAAXeEV5V88ZBRM8sCYgB6GucgNl9EOUZCZAMZAtylNpONcpCxsJytpZBZB0bJhp9C1VLhQRFN6BebqZC3Utz53x9t8hZAKpRlgQ",
-  "verify_token": "my_name_e_jeff",
+  "verify_token": "process.env.my_name_e_jeff",
   "app_secret": "b3e6988132cd6556e701e93e1b8fac8c"
 }
