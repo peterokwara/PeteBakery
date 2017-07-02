@@ -1,5 +1,6 @@
 'use strict';
-const BootBot = require('bootbot');
+// const BootBot = require('bootbot');
+const BootBot = require('./lib/BootBot');
 const config = require('config');
 
 const bot = new BootBot({
