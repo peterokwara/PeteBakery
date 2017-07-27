@@ -1,3 +1,4 @@
+// @flow
 'use strict';
 // const BootBot = require('bootbot');
 const BootBot = require('./lib/BootBot');
@@ -206,28 +207,21 @@ bot.on('message', (payload, chat) => {
         const payload_1 = {
 
           "template_type": "receipt",
-          "recipient_name": "Peter Chang",
+          "recipient_name": "Peter Okwara",
           "order_number": "000000000000000",
           "currency": "USD",
-          "payment_method": "Visa 1234",
+          "payment_method": "MPESA",
           "timestamp": "1428444852",
           "elements": [{
-              "title": "Oculus Rift",
+              "title": "BlackForest Cake",
               "subtitle": "Includes: headset, sensor, remote",
               "quantity": 1,
               "price": 599.00,
               "currency": "USD"
-            },
-            {
-              "title": "Samsung Gear VR",
-              "subtitle": "Frost White",
-              "quantity": 1,
-              "price": 99.99,
-              "currency": "USD"
             }
           ],
           "address": {
-            "street_1": "1 Hacker Way",
+            "street_1": "Pangani",
             "street_2": "",
             "city": "Menlo Park",
             "postal_code": "94025",
@@ -261,11 +255,11 @@ bot.on('message', (payload, chat) => {
         };
         convo.sendTemplate(payload_1, options_1);
 
-        convo.say(`Ok, here's what you told me about you:
-      - Name: ${convo.get('Size')}
-      - Favorite Food: ${convo.get('Quantity')}
-      `);
-        askSize(convo);
+      //   convo.say(`Ok, here's what you told me about you:
+      // - Name: ${convo.get('Size')}
+      // - Favorite Food: ${convo.get('Quantity')}
+      // `);
+      //   askSize(convo);
       }
     }];
 
