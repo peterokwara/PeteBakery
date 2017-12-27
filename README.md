@@ -2,6 +2,13 @@
 
 A facebook messenger bot. It enables one to order cakes or dough nuts through messenger.
 
+## Video Example
+
+A video of the code running
+
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=o3bxxVc30N8" target="_blank"><p align="center"><img src="./Assets/messenger.jpg" 
+alt="petebakery messenger bot"/></p></a>
+
 ## Getting Started
 
 Install the necessary packages by running
